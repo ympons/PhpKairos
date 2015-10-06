@@ -9,7 +9,7 @@
         {
             "name": "Yaismel Miranda",
             "homepage": "https://github.com/ympons",
-            "email": "yaismel.miranda@gmail.com"           
+            "email": "yaismel.miranda@gmail.com"
         }
     ],
     "require": {
@@ -29,5 +29,5 @@
         "psr-4": {
             "PhpKairos\\Test\\": "tests/"
         }
-    }    
+    }
 }

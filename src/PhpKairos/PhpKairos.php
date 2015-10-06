@@ -32,25 +32,41 @@ class PhpKairos
    * @param string $app_id    The server port.
    * @param string $app_key   An old connection Token to reuse,
    */
-  public function __construct( $url = '', $app_id = '', $app_key = '' )
+  public function __construct( $url = 'http://api.kairos.com/', $app_id = '', $app_key = '' )
   { 
-    $options['base_uri'] = $url;
-    $options['defaults']['headers']['app_id'] = $app_id;
-    $options['defaults']['headers']['app_key'] = $app_key;
+    $options = [
+      'base_uri' => $url,
+      'headers' => [
+        'app_id' => $app_id,
+        'app_key' => $app_key
+      ]
+    ];
     
-    self::resolveOptions($options);
-    
+    self::configureDefaults($options);
+
     // Initialize the client
-    $this->client = new GuzzleHttp\Client($options);
+    try
+    {
+      $this->client = new \GuzzleHttp\Client($options);
+    }
+    catch (\Exception $e)
+    {
+      // Wrap any exception to PhpKairosException
+      throw new PhpKairosException($e);
+    }
   }
-  
-  private static function resolveOptions(array &$options)
+
+  private function getClient()
   {
-    $options['defaults']['headers']['User-Agent'] = isset($options['defaults']['headers']['User-Agent']) ? $options['defaults']['headers']['User-Agent'] : 'PhpKairos/1.0';
-    $options['defaults']['headers']['Accept'] = isset($options['defaults']['headers']['Accept']) ? $options['defaults']['headers']['Accept'] : 'application/json';
-    $options['defaults']['headers']['Content-Type'] = isset($options['defaults']['headers']['Content-Type']) ? $options['defaults']['headers']['Content-Type'] : 'application/json';
+    return $this->client;
   }
-  
+
+  private static function configureDefaults(array &$options)
+  {
+    $options['headers']['User-Agent'] = 'PhpKairos/1.0';
+    $options['headers']['Content-Type'] = 'application/json';
+  }
+
   /**
    * Takes a photo, finds the faces within it, and stores the faces into a gallery you create.
    *
@@ -58,7 +74,7 @@ class PhpKairos
    * @param string      $subject_id
    * @param string      $gallery_name
    *
-   * @return mixed
+   * @return Psr\Http\Message\ResponseInterface
    */
   public function enroll($image, $subject_id, $gallery_name, array $options = array())
   {
@@ -68,17 +84,16 @@ class PhpKairos
           'gallery_name' => $gallery_name
     ];
     $params = $params + $options;
-    
     return $this->client->post('enroll', [ 'json' => $params ]);
   }
- 
+
   /**
    * Takes an photo, finds the faces within it, and tries to match them against the faces you have already enrolled into a gallery.
    *
    * @param uri|base64  $image
    * @param string      $gallery_name
    *
-   * @return mixed
+   * @return Psr\Http\Message\ResponseInterface
    */
   public function recognize($image, $gallery_name, array $options = array())
   {
@@ -90,13 +105,13 @@ class PhpKairos
     
     return $this->client->post('recognize', [ 'json' => $params ]);
   }
- 
+
   /**
    * Takes a photo and returns the facial features it finds.
    *
    * @param uri|base64  $image
    *
-   * @return mixed
+   * @return Psr\Http\Message\ResponseInterface
    */
   public function detect($image, array $options = array())
   {
@@ -109,7 +124,7 @@ class PhpKairos
   /**
    * Lists out all the galleries you have created.
    *
-   * @return mixed
+   * @return Psr\Http\Message\ResponseInterface
    */  
   public function listGalleries(array $options = array())
   {
@@ -121,7 +136,7 @@ class PhpKairos
    *
    * @param string $gallery_name
    *
-   * @return mixed
+   * @return Psr\Http\Message\ResponseInterface
    */
   public function viewGallery($gallery_name, array $options = array()) 
   {
@@ -130,39 +145,37 @@ class PhpKairos
     
     return $this->client->post('gallery/view', [ 'json' => $params ]);   
   }
-   
+
   /**
    * Removes a gallery and all of its subjects.
    *
    * @param string $gallery_name
    *
-   * @return mixed
+   * @return Psr\Http\Message\ResponseInterface
    */
-  public function removeGallery($gallery_name, array $options = array()) 
+  public function removeGallery($gallery_name) 
   {
     $params = [ 'gallery_name' => $gallery_name ];
-    $params = $params + $options;
     
     return $this->client->post('gallery/remove', [ 'json' => $params ]);      
   }
-   
+
   /**
    * Removes a face you have enrolled within a gallery.
    *
    * @param string      $subject_id
    * @param string      $gallery_name
    *
-   * @return mixed
+   * @return Psr\Http\Message\ResponseInterface
    */
-  public function removeSubject($subject_id, $gallery_name, array $options = array()) 
+  public function removeSubject($subject_id, $gallery_name)
   {
     $params = [
           'subject_id' => $subject_id,
           'gallery_name' => $gallery_name
     ];
-    $params = $params + $options;
     
-    return $this->client->post('gallery/remove_subject', [ 'json' => $params ]);   
+    return $this->client->post('gallery/remove_subject', [ 'json' => $params ]);
   }
 }
 
