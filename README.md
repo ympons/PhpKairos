@@ -27,7 +27,7 @@ Now get the required libraries to work with PhpKairos:
 php composer.phar --no-dev install
 ```
 ###### Note:
-> If you already have a composer installed or your existing project use it, you can install/add PhpKairos via Composer [https://packagist.org/packages/ympons/phpkairos](https://packagist.org/packages/ympons/phpkairos), it is linked to this GitHub repository ( so it is everityme updated ), and add it as dependecy to your project.
+> If you already have a composer installed or your existing project use it, you can install/add PhpKairos via Composer [https://packagist.org/packages/ympons/phpkairos](https://packagist.org/packages/ympons/phpkairos), it is linked to this GitHub repository ( so it is everytime updated ), and add it as dependecy to your project.
     
     php composer.phar require "ympons/phpkairos:dev-master" --update-no-dev
 
