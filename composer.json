@@ -1,6 +1,6 @@
 {
     "name": "ympons/phpkairos",
-    "description": "PhpKairos is a good SDK to work with Kairos",
+    "description": "PhpKairos is a nice client for the Kairos Face Recognition API",
     "version": "v1.0",
     "keywords": ["kairos","sdk","phpkairos"],
     "type": "library",
