@@ -8,9 +8,6 @@ php:
   - 7.0
   - hhvm
 
-install:
-  - "./build/composer_install.sh"
-
 script:
   - make test 
 
