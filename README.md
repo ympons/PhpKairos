@@ -1,6 +1,6 @@
 # PhpKairos
 
-PhpKairos is a nice client for [the Kairos Face Recognition API](https://www.kairos.com)
+PhpKairos is a nice client for the [Kairos Face Recognition API](https://www.kairos.com)
 
 > **status: Development**
 > Please [report any bugs](https://github.com/ympons/PhpKairos/issues) you find so that we can improve the library for everyone.
