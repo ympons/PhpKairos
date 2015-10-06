@@ -28,9 +28,9 @@ class PhpKairos
   /**
    * Class Constructor
    *
-   * @param string $hostname  The Kairos url.
-   * @param string $app_id    The server port.
-   * @param string $app_key   An old connection Token to reuse,
+   * @param string $url       The Kairos Face Recognition url.
+   * @param string $app_id    The app id.
+   * @param string $app_key   The app key.
    */
   public function __construct( $url = 'http://api.kairos.com/', $app_id = '', $app_key = '' )
   { 
