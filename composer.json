@@ -1,0 +1,33 @@
+{
+    "name": "ympons/phpkairos",
+    "description": "PhpKairos is a good SDK to work with Kairos",
+    "version": "v1.0",
+    "keywords": ["kairos","sdk","phpkairos"],
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Yaismel Miranda",
+            "homepage": "https://github.com/ympons",
+            "email": "yaismel.miranda@gmail.com"           
+        }
+    ],
+    "require": {
+        "php": ">=5.5",
+        "guzzlehttp/guzzle": "~5.3|~6.0.1|~6.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.4"
+    },
+    "suggest": {
+        "ext-curl": "To send requests using cURL"
+    },
+    "autoload": {
+        "psr-4": {"PhpKairos\\": "src/PhpKairos"}
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "PhpKairos\\Test\\": "tests/"
+        }
+    }    
+}

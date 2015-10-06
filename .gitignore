@@ -1,0 +1,7 @@
+*.swp
+*.swo
+*.zip
+*.phar
+.build
+composer.lock
+vendor
