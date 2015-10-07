@@ -73,7 +73,8 @@ class PhpKairos
    * @param uri|base64  $image
    * @param string      $subject_id
    * @param string      $gallery_name
-   *
+   * @param array       $options
+   * 
    * @return Psr\Http\Message\ResponseInterface
    */
   public function enroll($image, $subject_id, $gallery_name, array $options = array())
@@ -92,6 +93,7 @@ class PhpKairos
    *
    * @param uri|base64  $image
    * @param string      $gallery_name
+   * @param array       $options
    *
    * @return Psr\Http\Message\ResponseInterface
    */
@@ -110,6 +112,7 @@ class PhpKairos
    * Takes a photo and returns the facial features it finds.
    *
    * @param uri|base64  $image
+   * @param array       $options
    *
    * @return Psr\Http\Message\ResponseInterface
    */
