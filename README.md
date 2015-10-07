@@ -38,3 +38,80 @@ PhpKairos specify autoload information, Composer generates a vendor/autoload.php
 require "vendor/autoload.php";
 use PhpKairos\PhpKairos;
 ```
+
+### Client initialization
+
+```php
+$api     = 'http://api.kairos.com/';
+$app_id  = 'your_app_id';
+$app_key = 'your_app_key';
+$client = new PhpKairos( $api, $app_id, $app_key );
+```
+
+### Enroll an image
+The image parameter must be a publicly accessible URL or Base64 encoded photo.
+```php
+$image        = 'http://media.kairos.com/kairos-elizabeth.jpg';
+$subject_id   = 'subject1';
+$gallery_name = 'gallerytest1';
+$options      = [
+  'selector' => 'SETPOSE',
+  'symmetricFill' => true
+];
+
+$response = $client->enroll($image, $subject_id, $gallery_name, $options);
+$result   = $response->getBody()->getContents();
+```
+
+### Recognize an image
+The image parameter must be a publicly accessible URL or Base64 encoded photo.
+```php
+$image        = 'http://media.kairos.com/kairos-elizabeth.jpg';
+$gallery_name = 'gallerytest1';
+
+$response = $client->recognize($image, $gallery_name);
+$result   = $response->getBody()->getContents();
+```
+
+### Detect image attributes
+The image parameter must be a publicly accessible URL or Base64 encoded photo.
+```php
+$encodedImage = 'iVBORw0KGgoAAA ... ABJRU5ErkJggg==\r\n';
+
+$response = $client->detect($encodedImage);
+$result   = $response->getBody()->getContents();
+```
+
+### List galleries
+Lists out all the galleries you have created.
+```php
+$response = $client->listGalleries();
+$result   = $response->getBody()->getContents();
+```
+
+### View a gallery
+Lists out all the subjects you have enrolled in a gallery
+```php
+$gallery_name = 'gallerytest1';
+
+$response = $client->viewGallery($gallery_name);
+$result   = $response->getBody()->getContents();
+```
+
+### Remove a gallery
+```php
+$gallery_name = 'gallerytest1';
+
+$response = $client->removeGallery($gallery_name);
+$result   = $response->getBody()->getContents();
+```
+
+### Remove a subject
+Removes a subject you have enrolled within a gallery
+```php
+$subject_id   = 'subject1';
+$gallery_name = 'gallerytest1';
+
+$response = $client->removeSubject($subject_id, $gallery_name);
+$result   = $response->getBody()->getContents();
+```
