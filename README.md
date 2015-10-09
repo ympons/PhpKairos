@@ -115,3 +115,7 @@ $gallery_name = 'gallerytest1';
 $response = $client->removeSubject($subject_id, $gallery_name);
 $result   = $response->getBody()->getContents();
 ```
+
+# License
+
+MIT License, see [LICENSE.md](./LICENSE).
