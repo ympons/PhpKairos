@@ -49,7 +49,7 @@ $client = new PhpKairos( $api, $app_id, $app_key );
 ```
 
 ### Enroll an image
-The image parameter must be a publicly accessible URL or Base64 encoded photo.
+The image parameter must be a publicly accessible URL or Base64 encoded photo
 ```php
 $image        = 'http://media.kairos.com/kairos-elizabeth.jpg';
 $subject_id   = 'subject1';
@@ -64,7 +64,7 @@ $result   = $response->getBody()->getContents();
 ```
 
 ### Recognize an image
-The image parameter must be a publicly accessible URL or Base64 encoded photo.
+The image parameter must be a publicly accessible URL or Base64 encoded photo
 ```php
 $image        = 'http://media.kairos.com/kairos-elizabeth.jpg';
 $gallery_name = 'gallerytest1';
@@ -74,7 +74,7 @@ $result   = $response->getBody()->getContents();
 ```
 
 ### Detect image attributes
-The image parameter must be a publicly accessible URL or Base64 encoded photo.
+The image parameter must be a publicly accessible URL or Base64 encoded photo
 ```php
 $encodedImage = 'iVBORw0KGgoAAA ... ABJRU5ErkJggg==\r\n';
 
@@ -83,7 +83,7 @@ $result   = $response->getBody()->getContents();
 ```
 
 ### List galleries
-Lists out all the galleries you have created.
+Lists out all the galleries you have created
 ```php
 $response = $client->listGalleries();
 $result   = $response->getBody()->getContents();
